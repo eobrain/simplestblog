@@ -1,12 +1,24 @@
 import fs from 'node:fs/promises'
 import { glob } from 'glob'
-import showdown from 'showdown'
 import { mkdirIfNecessary } from './file.js'
 import Mustache from 'mustache'
 import { extractFrontMatter } from './frontmatter.js'
 import { pp } from 'passprint'
+import { Marked } from 'marked'
+import markedFootnote from 'marked-footnote'
+import createDOMPurify from 'dompurify'
+import { JSDOM } from 'jsdom'
 
-const converter = new showdown.Converter({ tables: true })
+const window = new JSDOM('').window
+const DOMPurify = createDOMPurify(window)
+
+const mf = markedFootnote()
+
+mf.extensions[0].renderer = ({ raw, label }) =>
+  pp(`<aside>${makeHtml('<sup>' + label + '</sup>' + raw.match(/[^:]*: (.*)/)[1])}</aside>`)
+const marked = new Marked().use(mf)
+
+const makeHtml = (markdown) => DOMPurify.sanitize(marked.parse(markdown))
 
 // Read metadata
 const config = JSON.parse(await fs.readFile('content/config.json'))
@@ -22,7 +34,7 @@ for (const path of await glob('content/posts/*.md')) {
   frontMatter.slug = path.match(/^content\/posts\/(.*)\.md$/)[1]
   postMetadata.push(pp(frontMatter))
 }
-postMetadata.sort((a,b) => a.created < b.created ? 1 : -1)
+postMetadata.sort((a, b) => a.created < b.created ? 1 : -1)
 
 const draftMetadata = []
 for (const path of await glob('content/drafts/*.md')) {
@@ -37,7 +49,7 @@ await mkdirIfNecessary(siteDir)
 const head = await fs.readFile('layout/head.html', 'utf8')
 
 async function renderWrite (markdown, { slug, title, created, image }, template, description, prev, next) {
-  const contentHtml = converter.makeHtml(markdown)
+  const contentHtml = makeHtml(markdown)
   const rendered = Mustache.render(template, {
     title,
     description,
