@@ -17,7 +17,7 @@ Create a blog by editing markdown files.
         "host": "https://some-blog-site.com"
       }
       ```
-    2. At least one file ending in `.md` in the `pages/` directory with content of the form
+    2. At least one file ending in `.md` in the `content/pages/` directory with content of the form
     ```markdown
     ---
     index: 0
@@ -25,7 +25,7 @@ Create a blog by editing markdown files.
     ---
     Something about this blog
     ```
-    3. At least one file ending in `.md` in the `posts/` directory with content of the form
+    3. At least one file ending in `.md` in the `content/posts/` directory with content of the form
     ```markdown
     ---
     created: 2024-02-20
