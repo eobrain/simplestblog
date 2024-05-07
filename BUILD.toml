@@ -1,0 +1,7 @@
+[generate]
+deps=["content/config.json"]
+exec="node index.js"
+
+["content/config.json"]
+deps=["content-demo/config.json"]
+exec="cp -rT content-demo/ content/"
