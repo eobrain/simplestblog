@@ -5,6 +5,10 @@ import { mkdirIfNecessary } from './file.js'
 import Mustache from 'mustache'
 import { extractFrontMatter } from './frontmatter.js'
 import { pp } from 'passprint'
+import util from 'util'
+import childProcess from 'child_process'
+
+const exec = util.promisify(childProcess.exec)
 
 const converter = new showdown.Converter({ tables: true })
 
@@ -22,7 +26,7 @@ for (const path of await glob('content/posts/*.md')) {
   frontMatter.slug = path.match(/^content\/posts\/(.*)\.md$/)[1]
   postMetadata.push(pp(frontMatter))
 }
-postMetadata.sort((a,b) => a.created < b.created ? 1 : -1)
+postMetadata.sort((a, b) => a.created < b.created ? 1 : -1)
 
 const draftMetadata = []
 for (const path of await glob('content/drafts/*.md')) {
@@ -33,6 +37,7 @@ for (const path of await glob('content/drafts/*.md')) {
 
 const siteDir = '_site'
 await mkdirIfNecessary(siteDir)
+await exec(`(cd content && tar -cf - img) | (cd ${siteDir} && tar -xf -)`)
 
 const head = await fs.readFile('layout/head.html', 'utf8')
 

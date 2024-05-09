@@ -16,8 +16,6 @@ The majority of the text on this page is by Dave. Éamonn has changed it only wh
 
 Finally, a reminder about the goal of this project. The web is not print. Webpages are not books. Therefore, the goal of Tufte CSS is not to say “websites should look like this interpretation of Tufte’s books” but rather “here are some techniques Tufte developed that we’ve found useful in print; maybe you can find a way to make them useful on the web”. Tufte CSS is merely a sketch of one way to implement this particular set of ideas. It should be a starting point, not a design goal, because any project should present their information as best suits their particular circumstances.
 
-</section><section>
-
 ## Getting Started
 
 To use Classless Tufte CSS, simply add the following to your HTML document’s `head` block:
@@ -36,8 +34,6 @@ All other files in the repository can be ignored, as they are merely used by the
 
 Now you just have to structure your semantic HTML as described in this document. For best results, View Source and Inspect Element frequently.
 
-</section><section>
-
 ## Fundamentals
 
 ### Sections and Headings
@@ -49,8 +45,6 @@ Tufte CSS uses `h1` for the document title, an immediatly following `p` for the 
 > [It is] notable that the Feynman lectures (3 volumes) write about all of physics in 1800 pages, using only 2 levels of hierarchical headings: chapters and A-level heads in the text. It also uses the methodology of *sentences* which then cumulate sequentially into *paragraphs*, rather than the grunts of bullet points. Undergraduate Caltech physics is very complicated material, but it didn’t require an elaborate hierarchy to organize. <footer>[Edward Tufte, forum post, ‘Book design: advice and examples’ thread][6]</footer>
 
 As a bonus, this excerpt regarding the use of headings provides an example of block quotes. In Tufte CSS they are just lightly styled, semantically correct HTML using `blockquote` and `footer` elements. See page 20 of <a href="https://www.edwardtufte.com/tufte/books_vdqi">The Visual Display of Quantitative Information</a> for an example in print,
-
-</section><section>
 
 In his later books, Tufte starts each section with a bit of vertical space, a non-indented paragraph, and the first few words of the sentence set in small caps.
 
@@ -78,8 +72,6 @@ However, because most browsers’ default underlining does not clear descenders 
 
 As always, these design choices are merely one approach that Tufte CSS provides by default. Other approaches can also be made to work. The goal is to make sentences readable without interference from links, as well as to make links immediately identifiable even by casual web users.
 
-</section><section>
-
 ## Epigraphs
 
 > The English language . . . becomes ugly and inaccurate because our thoughts are foolish, but the slovenliness of our language makes it easier for us to have foolish thoughts.
@@ -91,8 +83,6 @@ As always, these design choices are merely one approach that Tufte CSS provides 
 > I do not paint things, I paint only the differences between things.</p><footer>Henri Matisse, <cite>Henri Matisse Dessins: thèmes et variations</cite> (Paris, 1943), 37</footer>
 
 If you’d like to introduce your page or a section of your page with some quotes, use epigraphs. Modeled after chapter epigraphs in Tufte’s books (particularly *Beautiful Evidence*), these are `blockquote` elements with a bit of specialized styling that only happens when they are immediatly after a `h2` header element. Quoted text is italicized. The source goes in a `footer` element inside the `blockquote`. We have provided three examples in the epigraph of this section, demonstrating shorter and longer quotes, with and without a paragraph tag, and showing how multiple quotes within an epigraph fit together with the use of a wrapper class.
-
-</section><section>
 
 ## Sidenotes: Footnotes and Marginal Notes
 
@@ -140,8 +130,6 @@ Lists that follow a paragraph are also put in the margin.
         
 Figures in the margin are created as margin notes, as demonstrated in the next section.
         
-</section><section>
-
 ## Figures
         
 Tufte emphasizes tight integration of graphics with text. Data, graphs, and figures are kept with the text that discusses them. In print, this means they are not relegated to a separate page. On the web, that means readability of graphics and their accompanying text without extra clicks, tab-switching, or scrolling.
@@ -157,9 +145,7 @@ Figures should try to use the `figure` element, which by default are constrained
 But tight integration of graphics with text is central to Tufte’s work even when those graphics are ancillary to the main body of a text. In many of those cases, a margin figure may be most appropriate. To place figures in the margin, just wrap an image (or whatever) in a margin note inside a `p` tag, as seen to the right of this paragraph.
 
 If you need a full-width figure, put it outside the `section` directly under an `article`, and it will take up (almost) the full width of the screen. This approach is demonstrated below using Edward Tufte’s English translation of the Napoleon’s March data visualization. From *Beautiful Evidence*, page 122-124.
-        
-</section><section>
-      
+              
 One obstacle to creating elegant figures on the web is the difficulty of handling different screen sizes, especially on the fly. Embedded `iframe` elements are particularly troublesome. For these instances simply put the `iframe` inside a `figure` element. The most common use for this is probably YouTube videos, e.g.
       
 ```html
@@ -198,21 +184,17 @@ Extended code examples should live in a `code` element within a `pre` element. T
 ;; If this proselytizing has worked, check out:
 ;; http://howistart.org/posts/clojure/1
 ```
-</section><section>
-
 ## ImageQuilts
         
 Tufte CSS provides support for Edward Tufte and Adam Schwartz’s [ImageQuilts][13]. See the [ET forum announcement thread][14] for more on quilts. Some have ragged edges, others straight. Include these images just as you would any other `figure`.
 
 This is an ImageQuilt surveying Chinese calligraphy, placed in a full-width figure to accomodate its girth:
         
-</section><figure>![Image of Chinese Calligraphy][15]</figure><section>
+![Image of Chinese Calligraphy][15]
 
 Here is an ImageQuilt of 47 animal sounds over and over, in a figure constrained to the main text region. This quilt has ragged edges, but the image itself is of course still rectangular.
       
-<figure>![Image of animal sounds][16]</figure>
-
-</section><section>
+![Image of animal sounds][16]
 
 ## Tables
         
